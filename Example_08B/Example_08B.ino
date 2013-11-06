@@ -4,8 +4,10 @@ const int R_LED = 9;
 const int G_LED = 10;
 const int B_LED = 11;
 const int BUTTON = 12;
+const int LED  = 13;  //Build in LED.
 
 int val = 0; // variable to store the value coming from the sensor
+int valLED = LOW;  // variable to store LED state
 
 int btn = LOW;
 int old_btn = LOW;
@@ -18,9 +20,17 @@ byte r = 0;
 byte g = 0;
 byte b = 0;
 
+
 void setup() {
   Serial.begin(9600); // open the serial port
   pinMode(BUTTON, INPUT);
+  pinMode(LED, OUTPUT);
+  digitalWrite(LED, HIGH);
+  valLED = HIGH;
+  delay(50);
+  toggleLED();
+  delay(50);
+  toggleLED();
 }
 
 void loop() {
@@ -32,6 +42,7 @@ void loop() {
 
     // read the incoming byte:
     inByte = Serial.read();
+    toggleLED();  //Verbose LED
 
     // If the marker's found, next 6 characters are the colour
     if (inByte == '#') {
@@ -86,5 +97,15 @@ int hex2dec(byte c) { // converts one HEX character into a number
   }
 }
 
-
+//Functions go here.
+void toggleLED()  {
+  if (valLED == HIGH){
+    digitalWrite(LED, LOW);
+    valLED = LOW;
+  } else {
+    digitalWrite(LED, HIGH);
+    valLED = HIGH;
+  }  
+}
+ 
 
