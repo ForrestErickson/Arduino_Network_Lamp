@@ -1,4 +1,6 @@
 // Example 08B: Arduino Networked Lamp
+// Commited Nov 5 to GIT and GITHUB.
+
 const int SENSOR = 0;
 const int R_LED = 9;
 const int G_LED = 10;
